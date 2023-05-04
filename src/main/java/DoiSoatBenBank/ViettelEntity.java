@@ -94,5 +94,17 @@ public class ViettelEntity {
         this.QUANTITY = QUANTITY;
     }
 
-
+    @Override
+    public String toString() {
+        return "ViettelEntity{" +
+                "REQUEST_ID='" + REQUEST_ID + '\'' +
+                ", ORDER_ID='" + ORDER_ID + '\'' +
+                ", REQUEST_DATE='" + REQUEST_DATE + '\'' +
+                ", CP_CODE='" + CP_CODE + '\'' +
+                ", BILLING_CODE='" + BILLING_CODE + '\'' +
+                ", AMOUNT='" + AMOUNT + '\'' +
+                ", QUANTITY='" + QUANTITY + '\'' +
+                ", TRANG_THAI='" + TRANG_THAI + '\'' +
+                '}';
+    }
 }

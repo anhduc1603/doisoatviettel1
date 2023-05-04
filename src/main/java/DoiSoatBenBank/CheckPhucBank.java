@@ -83,6 +83,7 @@ public class CheckPhucBank {
                                 + bankEntity.getPARTNER_CODE() + "\t"
                                 + bankEntity.getFROM_SYSTEM_ID()+ "\t"
                                 + status
+
                 );
                 result.put(count,bankEntity);
                 count++;
@@ -100,7 +101,7 @@ public class CheckPhucBank {
     private static List<ViettelEntity> getDataViettels() {// Map{orderId, TrạngThái}
         //load tất cả file viettel theo rangerDate
 
-        String formatFix = ".csv";
+//        String formatFix = ".csv";
         List<ViettelEntity> listViettel = new ArrayList<>();
         try {
 //            File[] fileArray = getListFile(toDate, rangerDate, linkFileViettel, formatFix);
@@ -112,8 +113,11 @@ public class CheckPhucBank {
                     String requestId = sps[0];
                     if(!"REQUEST_ID".equals(requestId)){
                         String orderId = sps[1];
+
                         String status = sps[7];
-                        ViettelEntity viettelEntity = new ViettelEntity(requestId,orderId,status);
+                        ViettelEntity viettelEntity = new ViettelEntity(sps[0],sps[1],sps[2],sps[3],sps[4],sps[5],sps[6],sps[7]);
+
+//                        ViettelEntity viettelEntity = new ViettelEntity(requestId,orderId,status);
                         listViettel.add(viettelEntity);
                     }
                 }
@@ -194,9 +198,8 @@ public class CheckPhucBank {
     }
 
     private static String compareLvbWithVietetl( List<LvbEntity> listLvbis, List<ViettelEntity> listViettel ,String trandstion_id) {
-        String status = null;
+        String status = "";
         try{
-
 //            String orderId = listLvbis.stream()
 //                    .filter(item -> item.getTRANSACTION_ID() != null&&item.getTRANSACTION_ID().equals(trandstion_id))
 //                    .findAny().get().getORDER_ID_REQ();
@@ -208,21 +211,21 @@ public class CheckPhucBank {
                         try {
                             for (ViettelEntity item1:listViettel){
                                 if(item1.getORDER_ID()!=null&&orderId.equals(item1.getORDER_ID())){
-                                    status = item1.getTRANG_THAI();
+                                    status = item1.getTRANG_THAI() +"\t"  + item1.toString();
                                     break;
+                                }else {
+                                    status = "Thất bại";
                                 }
                             }
-                            if(status==null){
-                                status = "Thất bại";
-                            }
+//                            if(status==null){
+//                                status = "Thất bại";
+//                            }
                         }catch (Exception e){
                             System.out.println("Lỗi phát sinh khi tìm trong file viettel");
                         }
                     }
                 }
             }
-
-
 
         }catch (NullPointerException e){
             System.out.println(e.getMessage());
@@ -291,8 +294,7 @@ public class CheckPhucBank {
 
         // .xlsx is the format for Excel Sheets...
         // writing the workbook into the file...
-        FileOutputStream out = new FileOutputStream(
-                new File("D:\\DucHA\\kq\\GFGsheet.xlsx"));
+        FileOutputStream out = new FileOutputStream(new File("D:\\DucHA\\kq\\GFGsheet.xlsx"));
 
         workbook.write(out);
         out.close();
