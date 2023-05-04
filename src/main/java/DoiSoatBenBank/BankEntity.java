@@ -15,15 +15,17 @@ public class BankEntity {
     private String PARTNER_CODE;
     private String FROM_SYSTEM_ID;
 
-    private File file;
+    private String STATUS;
 
-    public File getFile() {
-        return file;
+    public BankEntity(String trans_id, String user_name, String full_name, String trans_time, String trans_name, String input_value, String amount_transfer, String input_amount, String payment_ref_no, String partner_code, String partner_code1, String from_system_id, String status) {
     }
 
+    public String getSTATUS() {
+        return STATUS;
+    }
 
-    public void setFile(File file) {
-        this.file = file;
+    public void setSTATUS(String STATUS) {
+        this.STATUS = STATUS;
     }
 
     public String getTRANS_ID() {
@@ -112,5 +114,11 @@ public class BankEntity {
 
     public void setFROM_SYSTEM_ID(String FROM_SYSTEM_ID) {
         this.FROM_SYSTEM_ID = FROM_SYSTEM_ID;
+    }
+
+
+
+
+    public BankEntity() {
     }
 }

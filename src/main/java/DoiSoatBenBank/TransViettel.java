@@ -116,8 +116,7 @@ public class TransViettel {
         }
 
         BankEntity b = new BankEntity();
-        b.setFile(fileBankCheck);
-        System.out.println(b.getFile());
+
 
         //File của LVBIS
         List<String> lines3 = Files.readAllLines(Paths.get(fCntt.getPath()));
